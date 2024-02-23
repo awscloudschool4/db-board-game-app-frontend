@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <p>© 2024 Your Website. All rights reserved.</p>
-          <Tooltip content="Follow us on Twitter">
+          <Tooltip>
             <a href="#" className="text-blue-300 hover:text-blue-400">
               AWS Cloud School
             </a>

@@ -11,6 +11,7 @@ import {
 import { MagnifyingGlassIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 export default function Home() {
   return (
+    //TODO: 정렬 별점순 이메일 순
     <>
       <Flex direction={"column"} gap={"8"}>
         <Heading as="h1" className="text-center">
@@ -38,11 +39,13 @@ export default function Home() {
             <Select.Content>
               <Select.Item value="game">보드게임</Select.Item>
               <Select.Item value="cafe">보드게임 카페</Select.Item>
-              <Select.Item value="metro">지하철역</Select.Item>
+              <Select.Item value="gu">지역구</Select.Item>
+              <Select.Item value="city">행정구역</Select.Item>
             </Select.Content>
           </Select.Root>
           <Button size="3">검색</Button>
         </Flex>
+
         <Box className="mt-10">test</Box>
       </Flex>
     </>

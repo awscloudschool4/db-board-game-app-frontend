@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
-
+import { useRouter } from "next/navigation";
 import { Flex, Card, Button, Heading, TextField, Text } from "@radix-ui/themes";
 
 const SignInPage = () => {
+  const router = useRouter();
   return (
     <>
       <Card size="5">
@@ -37,7 +38,12 @@ const SignInPage = () => {
           </Button>
           <span>
             <Text className="pr-3">아직 가입을 안하셨나요?</Text>
-            <Button variant="ghost" size="3" className="underline">
+            <Button
+              variant="ghost"
+              size="3"
+              className="underline"
+              onClick={() => router.push("/signup")}
+            >
               회원가입
             </Button>
           </span>
