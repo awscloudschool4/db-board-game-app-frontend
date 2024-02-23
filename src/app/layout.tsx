@@ -4,6 +4,7 @@ import { Theme } from "@radix-ui/themes";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <main className="flex min-h-screen flex-col items-center justify-between px-10 md:px-24 py-24">
             {children}
           </main>
+          <Footer />
         </Theme>
       </body>
     </html>
