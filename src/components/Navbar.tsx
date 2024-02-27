@@ -7,7 +7,7 @@ const Navbar = () => {
   const router = useRouter();
   return (
     <>
-      <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 dark:border-gray-600">
+      <nav className="bg-gray-900 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 dark:border-gray-600 relative">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-8 sm:px-20 py-4">
           <a
             href="/"
