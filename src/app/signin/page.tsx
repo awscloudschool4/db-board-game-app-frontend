@@ -1,9 +1,27 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { debounce } from "lodash";
 import { useRouter } from "next/navigation";
-import { Flex, Card, Button, Heading, TextField, Text } from "@radix-ui/themes";
+import {
+  Flex,
+  Card,
+  Button,
+  Heading,
+  TextField,
+  Text,
+  IconButton,
+} from "@radix-ui/themes";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 const SignInPage = () => {
+  const [username, setUsername] = useState("");
+  const [userpwd, setUserpwd] = useState("");
+  const [pwdEyes, setPwdEyes] = useState(false);
+
+  const usernameHandleChange = debounce((value) => {
+    console.log(value);
+  }, 300);
+
   const router = useRouter();
   return (
     <>
@@ -21,7 +39,11 @@ const SignInPage = () => {
             <Flex direction={"column"} gap="2">
               아이디
               <TextField.Root>
-                <TextField.Input size="3" placeholder="아이디" />
+                <TextField.Input
+                  size="3"
+                  placeholder="아이디"
+                  onChange={(e) => usernameHandleChange(e.target.value)}
+                />
               </TextField.Root>
             </Flex>
           </Text>
@@ -29,7 +51,16 @@ const SignInPage = () => {
             <Flex direction={"column"} gap="2">
               비밀번호
               <TextField.Root>
-                <TextField.Input size="3" placeholder="비밀번호" />
+                <TextField.Input
+                  size="3"
+                  type="password"
+                  placeholder="비밀번호"
+                />
+                <TextField.Slot>
+                  <IconButton variant="ghost">
+                    {pwdEyes ? <EyeOpenIcon /> : <EyeClosedIcon />}
+                  </IconButton>
+                </TextField.Slot>
               </TextField.Root>
             </Flex>
           </Text>
