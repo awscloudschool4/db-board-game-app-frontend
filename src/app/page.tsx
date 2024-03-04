@@ -49,6 +49,15 @@ const sampleCafeData: Cafe[] = [
     Image:
       "https://www.jigsawexplorer.com/puzzles/subjects/island-hut-423x300.jpg",
   },
+  {
+    CafeID: 4,
+    Name: "테스트 카페 4",
+    Location: "서울시 서초구 somewhere over the rainbow",
+    PhoneNumber: "010-1234-5678",
+    OperatingHour: "9:00 ~ 24:00",
+    Image:
+      "https://www.jigsawexplorer.com/puzzles/subjects/oia-morning-450x300.jpg",
+  },
 ];
 
 export default function Home() {
