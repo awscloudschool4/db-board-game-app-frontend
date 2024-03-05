@@ -27,14 +27,22 @@ interface ICafeScore {
   avg_rating: number;
 }
 
-interface ICafeSearch {
-  CafeId: number;
+interface IGameSearch {
+  GameID: number;
+  Name: string;
+  MinPlayers: number;
+  MaxPlayers: number;
+  AgeLimit: number;
+  Description?: string;
+  VideoURL?: string;
+  Image?: string;
+  SearchCount: number;
 }
 
 const GameRecommendation = () => {
   const [cafeReview, setCafeReview] = useState<ICafeReview[]>([]);
   const [cafeScore, setCafeScore] = useState<ICafeScore[]>([]);
-  const [cafeSearch, setCafeSearch] = useState<ICafeSearch[]>([]);
+  const [gameSearch, setGameSearch] = useState<IGameSearch[]>([]);
 
   async function getCafeReview() {
     try {
@@ -60,6 +68,18 @@ const GameRecommendation = () => {
     }
   }
 
+  async function getGameRank() {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/boardgame/api/search_rank`
+      );
+      const game_rank = await response.json();
+      if (game_rank) return game_rank;
+    } catch (error) {
+      return "Please check your server";
+    }
+  }
+
   useEffect(() => {
     getCafeReview().then((cafe_review) => {
       //console.log(cafe_review.slice(0, 5));
@@ -69,12 +89,36 @@ const GameRecommendation = () => {
     getCafeScore().then((cafe_score) => {
       setCafeScore(cafe_score.slice(0, 5));
     });
+
+    getGameRank().then((game_rank) => {
+      setGameSearch(game_rank.slice(0, 5));
+    });
   }, []);
 
   return (
     <div>
       {" "}
-      <Grid columns="2" gap="3" width="auto">
+      <Grid columns="3" gap="3" width="auto">
+        <Card>
+          <Heading className="justify-center text-center py-3">
+            인기 게임
+          </Heading>
+          {gameSearch.map((cafe, i) => (
+            <Link href={`/cafe/${cafe.GameID}`} id={String(cafe.GameID)}>
+              <Flex
+                direction={"row"}
+                id={String(cafe.GameID)}
+                className="pl-10 py-2"
+                gap={"2"}
+              >
+                <h2>
+                  {i + 1}. {cafe.Name}
+                </h2>
+                <p> (최대 {cafe.MaxPlayers}명)</p>
+              </Flex>
+            </Link>
+          ))}
+        </Card>
         <Card>
           <Heading className="justify-center text-center py-3">
             리뷰 많은 카페
