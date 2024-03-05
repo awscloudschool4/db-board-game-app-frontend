@@ -13,65 +13,14 @@ import {
 import { MagnifyingGlassIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
-interface Cafe {
-  CafeID: number;
-  Name: string;
-  Location: string;
-  PhoneNumber: string;
-  OperatingHour: string;
-  Image: string | null;
-}
-
-const sampleCafeData: Cafe[] = [
-  {
-    CafeID: 1,
-    Name: "테스트 카페 1",
-    Location: "서울시 서초구 somewhere over the rainbow",
-    PhoneNumber: "010-1234-5678",
-    OperatingHour: "9:00 ~ 24:00",
-    Image: "https://www.jigsawexplorer.com/puzzles/subjects/spa-supplies.jpg",
-  },
-  {
-    CafeID: 2,
-    Name: "테스트 카페 2",
-    Location: "서울시 서초구 somewhere over the rainbow",
-    PhoneNumber: "010-1234-5678",
-    OperatingHour: "9:00 ~ 24:00",
-    Image: "https://www.jigsawexplorer.com/puzzles/subjects/avon-pub.jpg",
-  },
-  {
-    CafeID: 3,
-    Name: "테스트 카페 3",
-    Location: "서울시 서초구 somewhere over the rainbow",
-    PhoneNumber: "010-1234-5678",
-    OperatingHour: "9:00 ~ 24:00",
-    Image:
-      "https://www.jigsawexplorer.com/puzzles/subjects/island-hut-423x300.jpg",
-  },
-];
+import Link from "next/link";
+import Recommendation from "@/components/CafeRecommendation";
+import GameRecommendation from "@/components/CafeRecommendation";
 
 export default function Home() {
-  const [cafeData, setCafeData] = useState<Cafe[]>([]);
-
-  async function getCafe() {
-    try {
-      const response = await fetch("http://192.168.0.36:8000/cafe/cafe_p");
-      const cafe_data = await response.json();
-      return cafe_data;
-    } catch (error) {
-      return "Please check your server";
-    }
-  }
-
-  useEffect(() => {
-    getCafe().then((cafe_data) => {
-      setCafeData(cafe_data);
-    });
-  }, [cafeData]);
-
+  const [searchValue, setSearchValue] = useState("");
+  const [filterValue, setFilterValue] = useState("game");
   return (
-    //TODO: 정렬 별점순 이메일 순
     <>
       <Flex direction={"column"} gap={"8"}>
         <Heading as="h1" className="text-center">
@@ -82,9 +31,9 @@ export default function Home() {
             <InfoCircledIcon />
           </Callout.Icon>
           <Callout.Text>
-            현재 검색 가능한 필터들은 아래와 같습니다. 뭔가를 바라시겠지만,
-            {"\n"}
-            이것이 우리의 한계! 국비 끝나면 업데이트 할수도? 안할수도.. 헿
+            이 프로젝트는 AWS Cloud School 4기 3조 박재연, 오현택, 이보림,
+            최재원이 만들었습니다. DB 구현을 목표로한 프로젝트이므로, 동작안하는
+            기능이 있어도 양해 부탁드립니다.
           </Callout.Text>
         </Callout.Root>
         <Flex gap="1" className="flex-col sm:flex-row w-full">
@@ -94,38 +43,24 @@ export default function Home() {
             </TextField.Slot>
             <TextField.Input size="3" placeholder="검색" />
           </TextField.Root>
-          <Select.Root defaultValue="game" size="3">
-            <Select.Trigger />
+          <Select.Root
+            defaultValue="game"
+            size="3"
+            onValueChange={(value) => setFilterValue(value)}
+          >
+            <Select.Trigger className="w-1/5" />
             <Select.Content>
               <Select.Item value="game">보드게임</Select.Item>
               <Select.Item value="cafe">보드게임 카페</Select.Item>
-              <Select.Item value="gu">지역구</Select.Item>
-              <Select.Item value="city">행정구역</Select.Item>
+              <Select.Item value="location">위치</Select.Item>
             </Select.Content>
           </Select.Root>
           <Button size="3">검색</Button>
         </Flex>
-
-        <Grid columns="3" gap="3" width="auto">
-          {sampleCafeData.map((cafe) => (
-            <Card key={cafe.CafeID}>
-              {cafe.Image ? (
-                <Inset clip="padding-box" side="top" pb="current">
-                  <Image
-                    src={cafe.Image}
-                    width={500}
-                    height={500}
-                    alt="Picture of the author"
-                  ></Image>
-                </Inset>
-              ) : null}
-              <h2>{cafe.Name}</h2>
-              <p>{cafe.Location}</p>
-              <p>{cafe.PhoneNumber}</p>
-              <p>{cafe.OperatingHour}</p>
-            </Card>
-          ))}
-        </Grid>
+        <Heading>보드게임 추천</Heading>
+        <GameRecommendation />
+        <Heading>보드게임 카페 추천</Heading>
+        <Recommendation />
       </Flex>
     </>
   );
