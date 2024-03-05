@@ -51,7 +51,7 @@ const SignInPage = () => {
           localStorage.setItem("accessToken", authToken);
           // console.log(authToken);
           const userData = authData.user;
-          console.log(userData.id);
+          //console.log(userData.id);
 
           loginUser(
             userData.id,

@@ -12,13 +12,13 @@ const Navbar = () => {
   const logoutUser = useUserStore((state) => state.removeUser);
   console.log(userInfo);
 
-  if (
-    userInfo.length === 0 &&
-    typeof window !== "undefined" &&
-    localStorage.getItem("accessToken")
-  ) {
-    localStorage.removeItem("accessToken");
-  }
+  // if (
+  //   userInfo.length === 0 &&
+  //   typeof window !== "undefined" &&
+  //   !localStorage.getItem("accessToken")
+  // ) {
+  //   localStorage.removeItem("accessToken");
+  // }
 
   function Logout() {
     logoutUser();

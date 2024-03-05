@@ -104,7 +104,7 @@ const GameRecommendation = () => {
             인기 게임
           </Heading>
           {gameSearch.map((cafe, i) => (
-            <Link href={`/cafe/${cafe.GameID}`} id={String(cafe.GameID)}>
+            <Link href={`/boardgame/${cafe.GameID}`} id={String(cafe.GameID)}>
               <Flex
                 direction={"row"}
                 id={String(cafe.GameID)}
