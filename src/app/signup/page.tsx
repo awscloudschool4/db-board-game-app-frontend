@@ -151,7 +151,7 @@ const SignUpPage = () => {
             </Flex>
           </Text>
           <Text as={"label"} size="3">
-            <Checkbox /> 이용양관 개인정보 및 정보이용에 동의합니다.
+            <Checkbox /> 이용약관 개인정보 및 정보이용에 동의합니다.
           </Text>
 
           <Button size="3" variant="soft" onClick={submitSignup}>
