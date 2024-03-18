@@ -45,7 +45,7 @@ const Navbar = () => {
               className="flex self-center dark:text-white gap-2"
               variant="ghost"
             >
-              <Heading color="gray"> 다있으 </Heading>
+              <Heading color="gray"> 하은정빈재연 </Heading>
               <Heading> DICE</Heading>
             </Button>
           </a>
